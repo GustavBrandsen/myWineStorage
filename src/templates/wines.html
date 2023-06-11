@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="../static/index.css" />
+  <title>Wines</title>
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+  <H1>Wines</H1>
+
+  <table>
+    <thead>
+      <tr style="position: sticky; top: 62px;">
+        {% for header in headers %}
+        <th>{{header}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for row in tableData %}
+      <tr>
+        <td>{{row['Name']}}</td>
+        <td>{{row['Producer']}}</td>
+        <td>{{row['Nation']}}</td>
+        <td>{{row['Local']}}</td>
+        <td>{{row['Varieties']}}</td>
+        <td>{{row['Type']}}</td>
+        <td>{{row['Abv']}}</td>
+        <td>{{row['Degree']}}</td>
+        <td>{{row['Price']}}</td>
+        <td>{{row['Year']}}</td>
+        <td>{{row['ml']}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/home.css" />
+    <title>Homepage</title>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <h1>{{header_value}}</h1>
+
+    {% if not session['username'] %}
+    <h2>You need to <a class="link" href="/login">login</a> or <a class="link" href="/register">register</a> in order
+        to use this site!</h2>
+
+    {% else %}
+    <div id="wines_div">
+
+        <form action="/" id="add_wine" method="POST">
+            <h2>Add a wine to your location!</h2>
+            <input type="text" id="add_wine_name" name="add_wine_name" placeholder="Wine Name (Copy from Wines tab)">
+            <select id="add_wine_loc" name="add_wine_loc">
+                <option value="none">-- Select Location --</option>
+                {% for names in locData %}
+                <option value="{{names}}">{{names}}</option>
+                {% endfor %}
+            </select>
+            <input type="text" id="add_wine_qty" name="add_wine_qty" placeholder="Wine Quantity">
+            <input type="submit" id="add_wine_btn" value="Add!">
+        </form>
+        
+        <table id="wine_table">
+            <thead>
+                <tr>
+                    {% for header in headers %}
+                    <th>{{header}}</th>
+                    {% endfor %}
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in tableData %}
+                <tr>
+                    <form action="/" id="remove_wine" method="POST">
+                        <td>{{row['Wine']}}</td>
+                        <input type="hidden" name="rem_wine_name" value="{{row['Wine']}}" />
+                        <td>{{row['Location']}}</td>
+                        <input type="hidden" name="rem_loc_name" value="{{row['Location']}}" />
+                        <td>{{row['Quantity']}}</td>
+                        <input type="hidden" name="rem_wine_qty" value="{{row['Quantity']}}" />
+                        <td><input type="submit" value="X"></td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="divcenter">
+                <div class="flashes">
+                {% for message in messages %}
+                    <h3 class="flash_msg">{{ message }}</h3>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    {% endif %}
+
+
+</body>
+
+</html>

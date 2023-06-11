@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/locations.css" />
+    <title>Homepage</title>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <h1>{{header_value}}</h1>
+
+    {% if not session['username'] %}
+    <h2>You need to <a class="link" href="/login">login</a> or <a class="link" href="/register">register</a> in order
+        to use this site!</h2>
+
+    {% else %}
+    <div id="wines_div">
+        <form action="/locations" id="add_loc" method="POST">
+            <h2>Add a new location!</h2>
+            <input type="text" id="add_loc_name" name="add_loc_name" placeholder="Location name">
+            <input type="submit" id="add_loc_btn" value="Add!">
+        </form>
+    </div>
+    
+    <table id="loc_table">
+        <thead>
+            <tr>
+                {% for head in header %}
+                <th>{{head}}</th>
+                {% endfor %}
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in locData %}
+            <tr>
+                <form action="/locations" id="remove_loc" method="POST">
+                    <td>{{row['name']}}</td>
+                    <input type="hidden" name="rem_loc_name" value="{{row['name']}}" />
+                    <td>{{row['amount']}}</td>
+                    <input type="hidden" name="rem_loc_amount" value="{{row['amount']}}" />
+                    <td><input type="submit" value="X"></td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="divcenter">
+            <div class="flashes">
+            {% for message in messages %}
+                <h3 class="flash_msg">{{ message }}</h3>
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    {% endwith %}
+</body>
+
+</html>

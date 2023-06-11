@@ -1,0 +1,6 @@
+flask
+flask_bcrypt
+flask_login
+bs4
+requests
+pandas

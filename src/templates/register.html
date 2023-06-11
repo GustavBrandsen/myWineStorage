@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/register.css" />
+    <title>Register</title>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <form action="/register" id="register_form" method="POST">
+        <div id="register_div">
+            <h1 id="register_header">Register</h1>
+            <input type="text" class="register_field" value="" placeholder="Username" name="username" />
+            <br>
+            <input type="password" class="register_field" value="" placeholder="Password" name="password" />
+            <br><br>
+            <input type="submit" id="register_btn" value="Register" name="register" />
+
+
+        </div>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="divcenter">
+            <div class="flashes">
+            {% for message in messages %}
+                <h3 class="flash_msg">{{ message }}</h3>
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    {% endwith %}
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+#add_loc {
+    margin-left: auto;
+    margin-right: auto;
+    width: 480px;
+    height: auto;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    padding: 15px 10px 15px 10px;
+    margin-bottom: 25px;
+}
+
+
+#add_loc_name {
+    width: 380px;
+}
+
+
+#loc_table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
